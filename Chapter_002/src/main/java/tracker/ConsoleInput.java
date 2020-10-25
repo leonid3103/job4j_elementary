@@ -1,0 +1,23 @@
+package tracker;
+import java.util.Scanner;
+
+public class ConsoleInput implements Input {
+
+    private final Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public String askStr(String question) {
+        System.out.print(question);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public int askInt(String question) {
+        return Integer.valueOf(askStr(question));
+    }
+
+    @Override
+    public int askInt(String question, int max) {
+        return 0;
+    }
+}
