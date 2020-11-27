@@ -11,10 +11,7 @@ public class ConvertList2Array {
         for (Integer num : list) {
             array[row][cell] = num;
             if (cell == array.length - 1) {
-                row++;
-            }
-            if (array.length - 1 <= cell) {
-                cell = 0;
+                row++; cell = 0;
             } else {
                 cell++;
             }
