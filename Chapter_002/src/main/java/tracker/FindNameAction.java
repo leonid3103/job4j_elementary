@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.List;
+
 public class FindNameAction implements UserAction {
 
     @Override
@@ -9,11 +11,20 @@ public class FindNameAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-            System.out.print("Введите имя заявки: ");
-            String name = input.askStr("");
-            for (Item item: tracker.findByName(name)) {
-                System.out.println("Имя: " + item.getName() + " id: " + item.getId());
+        System.out.print("Введите имя заявки: ");
+        String name = input.askStr("");
+        List<Item> items = tracker.findByName(name);
+        if (items.size() > 0) {
+            for (Item item : items) {
+                System.out.println("Заявка (Имя: " + item.getName() + ", id: " + item.getId() + ") успешно найдена");
             }
-            return true;
-        }
+        } else {
+            System.out.println("Заявка не найдена");
+    }
+        return true;
+    }
 }
+
+
+
+

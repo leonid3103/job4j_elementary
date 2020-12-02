@@ -1,6 +1,7 @@
 package tracker;
 
-public class ValidateInput extends ConsoleInput implements ValidInput {
+public class ValidateInput extends ConsoleInput {
+
     @Override
     public int askInt(String question) {
         boolean invalid = true;

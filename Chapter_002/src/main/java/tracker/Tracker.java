@@ -1,64 +1,71 @@
 package tracker;
-
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 class Tracker {
-    private final Item[] items = new Item[100];
-    private int position = 0;
-    private String generateId() {
+    private final List<Item> items = new ArrayList<>(100);
+
+    public String generateId() {
         Random rm = new Random();
         return String.valueOf(rm.nextLong() + System.currentTimeMillis());
     }
-   public void add(Item item) {
-        item.setId(this.generateId());
-        this.items[this.position++] = item;
-   }
-    public Item findById(String id) {
-        Item result = null;
-        for (Item item:items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-            }
 
-}         return result;
-}
-    public void replace(String id, Item item) {
-        boolean result = false;
-        for (int i = 0; i != this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-                this.items[i] = item;
-                this.items[i].setId(id);
-                break;
-            }
-        }
+    public Item createItem(Item item) {
+        item.setId(this.generateId());
+        items.add(item);
+        return item;
     }
-    public Item[] findByName(String key) {
-        int count = 0;
-        int index = 0;
-        Item[] result = new Item[this.position];
-        for (int i = 0; i < result.length; i++) {
-            if (this.items[i].getName().equals(key)) {
-                result[index++] = this.items[i];
-                count++;
+
+    public List<Item> findById(String id) {
+        List<Item> results = new ArrayList<Item>();
+        for (Item item:items) {
+            if (item.getId().equals(id)) {
+                results.add(item);
             }
-        }
-        return Arrays.copyOf(result, index);
+    } return results;
     }
+
+    public List<Item> findByName(String key) {
+        List<Item> results = new ArrayList<Item>();
+        for (Item item: items) {
+            if (item.getName().equals(key)) {
+                results.add(item);
+            }
+    }    return results;
+    }
+
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < position; i++) {
-            if (id.equals(items[i].getId())) {
-                items[i] = null;
-                System.arraycopy(items, i + 1, items, i, position - i);
-                position--;
+        Iterator<Item> itemIterator = items.iterator();
+        while (itemIterator.hasNext()) {
+            Item nextItem = itemIterator.next();
+            if (nextItem.getId().equals(id) && items.size() > 0) {
+                itemIterator.remove();
                 result = true;
-                break;
+            }
+        } return result;
+}
+
+    public boolean replace(String name, String id2, String name2) {
+        boolean result = false;
+        Iterator<Item> itemIterator = items.iterator();
+        while (itemIterator.hasNext()) {
+            Item nextItem = itemIterator.next();
+            if (nextItem.getName().equals(name) && items.size() > 0) {
+                nextItem.setId(id2);
+                nextItem.setName(name2);
+                result = true;
             }
         }
         return result;
     }
-    public Item[] findAll() {
-        return Arrays.copyOf(items, position);
+
+    public List<Item> findAll() {
+       List<Item> result = new ArrayList<>();
+        for (Item item:items) {
+            if (item != null) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 }
