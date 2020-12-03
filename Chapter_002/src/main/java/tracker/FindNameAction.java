@@ -13,13 +13,11 @@ public class FindNameAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         System.out.print("Введите имя заявки: ");
         String name = input.askStr("");
-        List<Item> items = tracker.findByName(name);
-        if (items.size() > 0) {
-            for (Item item : items) {
-                System.out.println("Заявка (Имя: " + item.getName() + ", id: " + item.getId() + ") успешно найдена");
-            }
+        List<Item> item = tracker.findByName(name);
+        if (item.size() > 0) {
+                System.out.println("Заявка (Имя: " + item.get(0).getName()  + ", id: " + item.get(0).getId() + ") успешно найдена");
         } else {
-            System.out.println("Заявка не найдена");
+                System.out.println("Заявка не найдена");
     }
         return true;
     }

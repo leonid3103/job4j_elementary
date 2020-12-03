@@ -13,14 +13,10 @@ public class DeleteAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         System.out.println("------------ Удаление заявки --------------");
         String id = input.askStr("Введите Id заявки для поиска: ");
-        List<Item> items = tracker.findById(id);
-        if (items.size() > 0) {
-            for (Item item : items) {
-                tracker.delete(item.getId());
-                System.out.println("Заявка (Имя: " + item.getName() + ", id: " + item.getId() + ") успешно удалена.");
-            }
+        if (tracker.delete(id)) {
+                System.out.println("Заявка успешно удалена.");
         } else {
-            System.out.println("Заявка не найдена");
+                System.out.println("Заявка не найдена");
         }
         return true;
 
