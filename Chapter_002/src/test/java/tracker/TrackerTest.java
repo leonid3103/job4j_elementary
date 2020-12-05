@@ -25,9 +25,8 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item1 = new Item("test1");
         tracker.createItem(item1);
-        for (Item a : tracker.findById(item1.getId())) {
-            assertThat(a.getId(), is(item1.getId()));
-        }
+        Item result = tracker.findById(item1.getId());
+            assertThat(result.getId(), is(item1.getId()));
     }
 
     @Test
@@ -37,10 +36,9 @@ public class TrackerTest {
         tracker.createItem(item1);
         Item item2 = new Item("test2");
         tracker.createItem(item2);
-        for (Item a : tracker.findByName("test1")) {
-            assertThat(a.getName(), is("test1"));
+        Item result = tracker.findByName("test1");
+            assertThat(result.getName(), is("test1"));
         }
-    }
 
     @Test
     public void findAllTest() {

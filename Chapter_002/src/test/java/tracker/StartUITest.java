@@ -30,13 +30,14 @@ public class StartUITest {
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
         Input in = new StubInput(
-                new String[]{"0", "delete", "1"});
+                new String[]{"0", "123456", "1"});
         Item item = tracker.createItem(new Item("delete"));
+        item.setId("123456");
         List<UserAction> actions = new ArrayList<UserAction>();
         actions.add(0, new DeleteAction());
         actions.add(1, new ExitAction());
         new StartUI().init(in, tracker, actions);
-        assertThat(true, is(tracker.findById(item.getName()).isEmpty()));
+        assertThat(true, is(tracker.findAll().isEmpty()));
     }
 
     @Test
