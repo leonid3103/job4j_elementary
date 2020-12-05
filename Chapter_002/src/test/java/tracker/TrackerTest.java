@@ -36,8 +36,8 @@ public class TrackerTest {
         tracker.createItem(item1);
         Item item2 = new Item("test2");
         tracker.createItem(item2);
-        Item result = tracker.findByName("test1");
-            assertThat(result.getName(), is("test1"));
+        List<Item> result = tracker.findByName("test1");
+            assertThat(result.get(0).getName(), is("test1"));
         }
 
     @Test
@@ -67,7 +67,8 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1");
         tracker.createItem(item);
-        tracker.replace("test1", "1234", "test2");
-        assertThat(tracker.findAll().get(0).getName(), is("test2"));
+        item.setId("456");
+        tracker.replace("456", "1234");
+        assertThat(tracker.findAll().get(0).getId(), is("1234"));
     }
 }

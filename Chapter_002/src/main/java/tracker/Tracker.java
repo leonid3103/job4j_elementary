@@ -15,22 +15,21 @@ class Tracker {
         return item;
     }
 
-    public List<Item> findById(String id) {
-        List<Item> results = new ArrayList<Item>();
+    public Item findById(String id) {
         for (Item item:items) {
             if (item.getId().equals(id)) {
-                results.add(item);
+                return item;
             }
-    } return results;
+    } return null;
     }
 
     public List<Item> findByName(String key) {
-        List<Item> results = new ArrayList<Item>();
+        List<Item> result = new ArrayList<>();
         for (Item item: items) {
             if (item.getName().equals(key)) {
-                results.add(item);
+                result.add(item);
             }
-    }    return results;
+    } return result;
     }
 
     public boolean delete(String id) {
@@ -41,19 +40,21 @@ class Tracker {
             if (nextItem.getId().equals(id) && items.size() > 0) {
                 itemIterator.remove();
                 result = true;
+                break;
             }
-        } return result;
-}
+        }
+        return result;
+    }
 
-    public boolean replace(String name, String id2, String name2) {
+    public boolean replace(String id, String idReplace) {
         boolean result = false;
         Iterator<Item> itemIterator = items.iterator();
         while (itemIterator.hasNext()) {
             Item nextItem = itemIterator.next();
-            if (nextItem.getName().equals(name) && items.size() > 0) {
-                nextItem.setId(id2);
-                nextItem.setName(name2);
+            if (nextItem.getId().equals(id) && items.size() > 0) {
+                nextItem.setId(idReplace);
                 result = true;
+                break;
             }
         }
         return result;
@@ -62,10 +63,8 @@ class Tracker {
     public List<Item> findAll() {
        List<Item> result = new ArrayList<>();
         for (Item item:items) {
-            if (item != null) {
                 result.add(item);
-            }
+            } return result;
         }
-        return result;
-    }
 }
+

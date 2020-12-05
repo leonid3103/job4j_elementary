@@ -14,7 +14,7 @@ public class FindIDAction implements UserAction {
         String id = input.askStr("Введите Id заявки: ");
         Item item = tracker.findById(id);
         if (item != null) {
-                System.out.println("Заявка (Имя: " + item.getName() + ", id: " + item.getId() + ") успешно найдена.");
+                System.out.println(item.toString());
             } else {
                 System.out.println("Заявка не найдена");
         }
