@@ -49,21 +49,20 @@ public class JobTest {
         assertThat(2, is(jobs.get(0).getPriority()));
     }
 
-
     @Test
     public void whenComparatorsDescending() {
         Comparator<Job> cmpNamePriority = new JobNameDescending().thenComparing(new JobPriorityDescending()
         );
-        int rsl = cmpNamePriority.compare(new Job("Impl task", 0), new Job("Fix bug", 1));
-        assertThat(rsl, lessThan(0));
+        int rsl = cmpNamePriority.compare(new Job("Impl task", 0), new Job("Impl task", 1));
+        assertThat(rsl, is(1));
     }
 
     @Test
     public void whenComparatorsAscending() {
         Comparator<Job> cmpNamePriority = new JobNameAscending().thenComparing(new JobPriorityAscending()
         );
-        int rsl = cmpNamePriority.compare(new Job("Impl task", 0), new Job("Fix bug", 1));
-        assertThat(rsl, greaterThan(0));
+        int rsl = cmpNamePriority.compare(new Job("Impl task", 0), new Job("Impl task", 1));
+        assertThat(rsl, lessThan(0));
     }
     }
 
