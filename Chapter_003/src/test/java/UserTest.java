@@ -27,6 +27,7 @@ public class UserTest {
         assertThat(rsl, greaterThan(0));
     }
 
+
     @Test
     public void whenCompareEqualName() {
         int rsl = new User("Petr", 32)
